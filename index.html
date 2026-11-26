@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SecureNotes – Three-Tier Cloud App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">🔐 SecureNotes</div>
+  <div id="userbox" hidden><span id="whoami"></span><button id="logout" class="ghost">Log out</button></div>
+</header>
+<main>
+  <section id="auth" class="card">
+    <div class="tabs">
+      <button id="tab-login" class="tab active">Login</button>
+      <button id="tab-register" class="tab">Register</button>
+    </div>
+    <form id="form-login" novalidate>
+      <label>Email<input type="email" id="l-email" autocomplete="email" required></label>
+      <label>Password<input type="password" id="l-pass" autocomplete="current-password" required></label>
+      <button type="submit">Sign in</button>
+    </form>
+    <form id="form-register" novalidate hidden>
+      <label>Full name<input type="text" id="r-name" autocomplete="name" required></label>
+      <label>Email<input type="email" id="r-email" autocomplete="email" required></label>
+      <label>Password<input type="password" id="r-pass" autocomplete="new-password" required>
+        <small>8+ characters, with letters and a number.</small></label>
+      <button type="submit">Create account</button>
+    </form>
+    <p id="msg" role="alert"></p>
+  </section>
+
+  <section id="app" class="card" hidden>
+    <h2>Your private notes</h2>
+    <form id="form-note" class="row">
+      <input type="text" id="note" maxlength="500" placeholder="Write a note…" required>
+      <button type="submit">Add</button>
+    </form>
+    <ul id="notes"></ul>
+    <p id="empty" class="muted">No notes yet.</p>
+  </section>
+
+  <section class="card status">
+    <h3>System status</h3>
+    <p><span id="dot" class="dot"></span><span id="health">Checking API…</span></p>
+    <p class="muted">Frontend (Nginx) → Flask API → MySQL on RDS (private subnet)</p>
+  </section>
+</main>
+<footer>Cloud Computing Capstone · Secure Three-Tier Architecture on AWS</footer>
+<script src="app.js"></script>
+</body>
+</html>

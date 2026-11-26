@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" font-family="Arial,sans-serif" font-size="13">
+<rect width="900" height="560" fill="#fff"/>
+<text x="450" y="26" text-anchor="middle" font-size="18" font-weight="bold">Secure Three-Tier Architecture on AWS</text>
+<rect x="20" y="60" width="860" height="480" rx="10" fill="#f6f9ff" stroke="#2f5bea" stroke-width="2"/>
+<text x="34" y="82" font-weight="bold" fill="#2f5bea">AWS Region (VPC 10.0.0.0/16)</text>
+<rect x="40" y="95" width="520" height="215" rx="8" fill="#eaf6ee" stroke="#1f9d55" stroke-width="2"/>
+<text x="52" y="115" font-weight="bold" fill="#1f9d55">Public subnet 10.0.1.0/24 (AZ-a)</text>
+<rect x="70" y="135" width="460" height="150" rx="8" fill="#fff" stroke="#555"/>
+<text x="300" y="157" text-anchor="middle" font-weight="bold">EC2 t3.micro (Amazon Linux 2023) – IAM role attached</text>
+<rect x="90" y="175" width="200" height="90" rx="6" fill="#dbe6ff" stroke="#2f5bea"/>
+<text x="190" y="200" text-anchor="middle" font-weight="bold">Tier 1: Nginx</text>
+<text x="190" y="220" text-anchor="middle">HTML / CSS / JS</text><text x="190" y="238" text-anchor="middle">HTTPS (443), headers</text><text x="190" y="254" text-anchor="middle">rate limiting</text>
+<rect x="310" y="175" width="200" height="90" rx="6" fill="#ffe9c7" stroke="#d98a00"/>
+<text x="410" y="200" text-anchor="middle" font-weight="bold">Tier 2: Flask API</text>
+<text x="410" y="220" text-anchor="middle">Gunicorn :8000 (localhost)</text><text x="410" y="238" text-anchor="middle">JWT auth, hashing,</text><text x="410" y="254" text-anchor="middle">validation, logging</text>
+<path d="M290 220 L310 220" stroke="#333" stroke-width="2" marker-end="url(#a)"/>
+<rect x="40" y="335" width="520" height="190" rx="8" fill="#fdecec" stroke="#d64545" stroke-width="2"/>
+<text x="52" y="355" font-weight="bold" fill="#d64545">Private subnets 10.0.2.0/24 (AZ-a) · 10.0.3.0/24 (AZ-b) – no route to Internet</text>
+<rect x="110" y="380" width="380" height="120" rx="8" fill="#fff" stroke="#555"/>
+<text x="300" y="405" text-anchor="middle" font-weight="bold">Tier 3: Amazon RDS MySQL (db.t3.micro)</text>
+<text x="300" y="428" text-anchor="middle">Not publicly accessible · encrypted at rest (KMS)</text><text x="300" y="446" text-anchor="middle">TLS in transit · automated backups (7 days)</text><text x="300" y="464" text-anchor="middle">Security group: 3306 only from web SG</text><text x="300" y="482" text-anchor="middle">Least-privilege DB user</text>
+<path d="M410 265 L410 380" stroke="#333" stroke-width="2" stroke-dasharray="5 3" marker-end="url(#a)"/>
+<text x="418" y="325" font-size="12">MySQL 3306 (TLS)</text>
+<rect x="600" y="95" width="260" height="95" rx="8" fill="#fff" stroke="#888"/>
+<text x="730" y="118" text-anchor="middle" font-weight="bold">Internet Gateway</text><text x="730" y="140" text-anchor="middle">Inbound: 80/443 → EC2</text><text x="730" y="158" text-anchor="middle">SSH closed – use SSM</text><text x="730" y="176" text-anchor="middle">Session Manager</text>
+<rect x="600" y="215" width="260" height="95" rx="8" fill="#fff" stroke="#888"/>
+<text x="730" y="238" text-anchor="middle" font-weight="bold">Amazon CloudWatch</text><text x="730" y="260" text-anchor="middle">Logs: app, nginx, auth</text><text x="730" y="278" text-anchor="middle">Metrics: CPU, memory, disk, RDS</text><text x="730" y="296" text-anchor="middle">Alarms → SNS email</text>
+<rect x="600" y="335" width="260" height="95" rx="8" fill="#fff" stroke="#888"/>
+<text x="730" y="358" text-anchor="middle" font-weight="bold">IAM</text><text x="730" y="380" text-anchor="middle">EC2 role: CloudWatch + SSM + S3</text><text x="730" y="398" text-anchor="middle">No access keys on the server</text><text x="730" y="416" text-anchor="middle">MFA on admin user</text>
+<rect x="600" y="455" width="260" height="70" rx="8" fill="#fff" stroke="#888"/>
+<text x="730" y="480" text-anchor="middle" font-weight="bold">Backup &amp; Recovery</text><text x="730" y="500" text-anchor="middle">RDS snapshots + mysqldump → S3</text>
+<text x="30" y="300" font-size="12" fill="#333">👤 Users (HTTPS)</text>
+<defs><marker id="a" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#333"/></marker></defs>
+</svg>
